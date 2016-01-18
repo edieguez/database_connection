@@ -41,4 +41,14 @@ public class MySQL_Connection {
             return null;
         }
     }
+
+    public static void main(String[] args) {
+        Connection connection = MySQL_Connection.getConection();
+
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.err);
+        }
+    }
 }
