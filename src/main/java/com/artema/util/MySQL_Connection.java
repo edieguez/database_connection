@@ -15,7 +15,7 @@ public class MySQL_Connection {
     private static String user;
     private static String password;
 
-    public static Connection getConection() {
+    public static Connection getConection() throws SQLException {
         try {
             System.out.print("Conecting with the database... ");
             Class.forName("com.mysql.jdbc.Driver");
@@ -30,25 +30,16 @@ public class MySQL_Connection {
                 password = properties.getString("password");
             }
 
-            Connection con = DriverManager.getConnection(
+            Connection connection = DriverManager.getConnection(
                     String.format("jdbc:mysql://%s:%s/%s", host, port, database),
                     user, password);
 
             System.out.println("success.");
-            return con;
-        } catch (ClassNotFoundException | SQLException | MissingResourceException ex) {
-            System.out.println("failed.\n" + ex);
-            return null;
-        }
-    }
-
-    public static void main(String[] args) {
-        Connection connection = MySQL_Connection.getConection();
-
-        try {
-            connection.close();
-        } catch (SQLException ex) {
+            return connection;
+        } catch (ClassNotFoundException | MissingResourceException ex) {
+            System.out.println("failed.\n");
             ex.printStackTrace(System.err);
+            return null;
         }
     }
 }
