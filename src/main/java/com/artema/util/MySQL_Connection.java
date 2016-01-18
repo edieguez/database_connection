@@ -15,6 +15,13 @@ public class MySQL_Connection {
     private static String user;
     private static String password;
 
+    /**
+     * Get a new database connection using the settings
+     * in database.properties file
+     * 
+     * @return java.sql.Connection
+     * @throws SQLException
+     */
     public static Connection getConection() throws SQLException {
         try {
             System.out.print("Conecting with the database... ");
