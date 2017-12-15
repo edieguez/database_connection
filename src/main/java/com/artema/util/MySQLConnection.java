@@ -1,5 +1,8 @@
 package com.artema.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,6 +10,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class MySQLConnection {
+    private static final Logger logger = LogManager.getLogger(QueryExecuter.class);
 
     private static ResourceBundle properties;
     private static String host;
@@ -24,8 +28,7 @@ public class MySQLConnection {
      */
     public static Connection getConection() throws SQLException {
         try {
-            System.out.print("Conecting with the database... ");
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             if (properties == null) {
                 properties = ResourceBundle.getBundle("database");
@@ -37,14 +40,14 @@ public class MySQLConnection {
                 password = properties.getString("password");
             }
 
-            Connection connection = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", host, port, database),
-                    user, password);
+            String connectionURL = String.format("jdbc:mysql://%s:%s/%s?useSSL=false", host, port, database);
+            logger.info(String.format("%s connecting...", connectionURL));
 
-            System.out.println("success.");
+            Connection connection = DriverManager.getConnection(connectionURL, user, password);
+
+            logger.info(String.format("%s connected...", connectionURL));
             return connection;
         } catch (ClassNotFoundException | MissingResourceException ex) {
-            System.out.println("failed.\n");
             ex.printStackTrace(System.err);
             return null;
         }

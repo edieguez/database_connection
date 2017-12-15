@@ -1,22 +1,29 @@
 package com.artema;
 
 import com.artema.util.MySQLConnection;
+import com.artema.util.QueryExecuter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class TestCase {
+public class GeneralTest {
+    private static final Logger logger = LogManager.getLogger(QueryExecuter.class);
 
-    public static void main(String[] args) {
+    @Test
+    public void testConnection() {
         try (Connection connection = MySQLConnection.getConection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SHOW DATABASES");
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            System.out.println("Available databases:");
+            logger.info("Available databases:");
 
             while (resultSet.next()) {
-                System.out.println("  " + resultSet.getString(1));
+                logger.info("  " + resultSet.getString(1));
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.err);
