@@ -1,6 +1,6 @@
 package com.artema;
 
-import com.artema.util.MySQL_Connection;
+import com.artema.util.MySQLConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class TestCase {
 
     public static void main(String[] args) {
-        try (Connection connection = MySQL_Connection.getConection()) {
+        try (Connection connection = MySQLConnection.getConection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SHOW DATABASES");
             ResultSet resultSet = preparedStatement.executeQuery();
 

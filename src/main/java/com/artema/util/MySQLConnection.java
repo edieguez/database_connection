@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public class MySQL_Connection {
+public class MySQLConnection {
 
     private static ResourceBundle properties;
     private static String host;
