@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class QueryExecuter {
-    private static final Logger logger = LogManager.getLogger(QueryExecuter.class);
+    private static final Logger logger = LogManager.getLogger();
     private final Connection connection;
 
     public QueryExecuter(Connection connection) {

@@ -10,7 +10,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class MySQLConnection {
-    private static final Logger logger = LogManager.getLogger(QueryExecuter.class);
+    private static final Logger logger = LogManager.getLogger();
 
     private static ResourceBundle properties;
     private static String host;
